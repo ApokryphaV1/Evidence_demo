@@ -158,8 +158,8 @@ def fit_sine_nonlin(x, y, A0=None, B0=None, C0=0.0, D0=None,
 # Streamlit UI
 # =============================================================
 
-st.set_page_config(page_title="Laplace Approximation Demo", layout="wide")
-st.title("Interactive Laplace Approximation: Sine vs Polynomial Models (Improved)")
+st.set_page_config(page_title="Model comparison Demo", layout="wide")
+st.title("Interactive Model comparison: Sine vs Polynomial Models")
 
 with st.sidebar:
     st.header("Simulation Controls")
@@ -232,10 +232,10 @@ if show_sine:
 if results:
     df = pd.DataFrame(results)
     best_log_marg = df["Log Marginal"].max()
-    df["Δ Log Marginal vs Best"] = df["Log Marginal"] - best_log_marg
+    df["Log Bayes factor( Models vs model with highest log(Z))"] = df["Log Marginal"] - best_log_marg
 
-    st.subheader("Log Marginal Likelihoods & Δ vs Best")
-    st.dataframe(df[["Model", "Log Marginal", "Δ Log Marginal vs Best"]].set_index("Model"))
+    st.subheader("Log Marginal Likelihoods and ")
+    st.dataframe(df[["Model", "Log Marginal", "Log Bayes factor( Models vs model with highest log(Z))"]].set_index("Model"))
 
     # Pairwise log Bayes factors (row vs column)
     models = df["Model"].tolist()
