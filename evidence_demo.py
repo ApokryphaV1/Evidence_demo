@@ -132,7 +132,7 @@ def fit_sine_nonlin(x, y, A0=None, B0=None, C0=0.0, D0=None,
                     bounds=((0, 1e-3, -2*np.pi, -np.inf), (np.inf, 50, 2*np.pi, np.inf))):
     """
     Use curve_fit with bounds + decent initial guesses. Falls back to least_squares with robust loss if needed.
-    Returns params, yhat
+    Returns params, y_hat
     """
     if B0 is None:
         B0 = fft_guess_B(x, y)
