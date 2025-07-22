@@ -132,7 +132,7 @@ def fit_sine_nonlin(x, y, A0=None, B0=None, C0=0.0, D0=None,
                     bounds=((0, 1e-3, -2*np.pi, -np.inf), (np.inf, 50, 2*np.pi, np.inf))):
     """
     Use curve_fit with bounds + decent initial guesses. Falls back to least_squares with robust loss if needed.
-    Returns params, y_hat
+    Returns params, yhat
     """
     if B0 is None:
         B0 = fft_guess_B(x, y)
@@ -158,8 +158,8 @@ def fit_sine_nonlin(x, y, A0=None, B0=None, C0=0.0, D0=None,
 # Streamlit UI
 # =============================================================
 
-st.set_page_config(page_title="Model comparison Demo", layout="wide")
-st.title("Interactive Model comparison: Sine vs Polynomial Models ")
+st.set_page_config(page_title="Laplace Approximation Demo", layout="wide")
+st.title("Interactive Laplace Approximation: Sine vs Polynomial Models (Improved)")
 
 with st.sidebar:
     st.header("Simulation Controls")
@@ -234,8 +234,8 @@ if results:
     best_log_marg = df["Log Marginal"].max()
     df["Δ Log Marginal vs Best"] = df["Log Marginal"] - best_log_marg
 
-    st.subheader("Log Marginal Likelihoods for the selected models:")
-    st.dataframe(df[["Model", "Log Marginal", "Log Bayes factor vs model with highest log(Z)"]].set_index("Model"))
+    st.subheader("Log Marginal Likelihoods & Δ vs Best")
+    st.dataframe(df[["Model", "Log Marginal", "Δ Log Marginal vs Best"]].set_index("Model"))
 
     # Pairwise log Bayes factors (row vs column)
     models = df["Model"].tolist()
